@@ -1,14 +1,21 @@
-import { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+
+import NavBar from './components/universal/NavBar'
+// import Footer from './components/universal/Footer'
+
+import RegisterPage from './components/pages/RegisterPage'
 
 function App() {
-  const [apiData, setApiData] = useState('')
-  useEffect(() => {
-    fetch('/api')
-      .then((response) => response.json())
-      .then((data) => setApiData(data))
-  }, [])
-
-  return <h1>{`${apiData.message}`}</h1>
+  return (
+    <>
+      <Router>
+        <NavBar />
+        <Routes>
+          <Route exact path='/' element={<RegisterPage />}></Route>
+        </Routes>
+      </Router>
+    </>
+  )
 }
 
 export default App

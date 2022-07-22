@@ -1,13 +1,132 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+  font-family: 'Poppins', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  --colorOne: #6d4950;
+  --colorTwo: #441a24;
+}
+
+.flex-sb {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Nav Bar Styles */
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background-color: var(--colorTwo);
+}
+
+.nav-logo-img {
+  height: 70px;
+}
+
+/* Footer Styles */
+footer {
+  height: 80px;
+  background-color: var(--colorTwo);
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 200px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  list-style: none;
+  color: white;
+  cursor: pointer;
+}
+
+.nav-links a:hover {
+  color: #dcdcdc;
+}
+
+/* Register Page Styles */
+
+.reg-flex {
+  display: flex;
+  /* height: calc(100vh - 150px); */
+  height: calc(100vh - 92.5px);
+}
+
+.reg-image {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 53%;
+  background: url('./components/assets/RegisterPageImg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.reg-image h1 {
+  color: white;
+}
+
+.reg-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -37px;
+  width: 80px;
+  background-color: var(--colorOne);
+  transform: skewX(-5deg);
+}
+.reg-form-cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 47%;
+  background-color: var(--colorOne);
+}
+
+.reg-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 0 1rem;
+  height: 500px;
+  width: 400px;
+  background-color: #dcdcdc;
+  text-align: center;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px 0px rgba(86, 85, 85, 0.296);
+}
+
+.reg-input {
+  padding: 0 0.5rem;
+  height: 45px;
+  background: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.input-49 {
+  width: 49%;
+}
+
+input[type='submit'] {
+  position: relative;
+  margin: 0 auto;
+  width: 150px;
 }
