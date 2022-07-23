@@ -13,6 +13,9 @@ router.post('/register', async (req, res) => {
     pass: hashedPass,
   }
   const newUser = new User(newData)
+  newUser.save((err) => {
+    err && console.log(err.message)
+  })
 
   console.log(newData)
   res.send('it worked')
