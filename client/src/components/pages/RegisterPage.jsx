@@ -8,6 +8,7 @@ function RegisterPage() {
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
+  const [passCont, setPassCont] = useState('')
 
   const regData = {
     firstName,
@@ -67,6 +68,7 @@ function RegisterPage() {
               id=''
               placeholder='Confirm Password'
               onChange={(e) => {
+                setPassCont(e.target.value)
                 console.log(regData)
               }}
             />
