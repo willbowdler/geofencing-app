@@ -12,6 +12,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route exact path='/' element={<RegisterPage />}></Route>
+          <Route exact path='/register' element={<RegisterPage />}></Route>
         </Routes>
       </Router>
     </>

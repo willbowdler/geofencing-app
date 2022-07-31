@@ -3,6 +3,7 @@ const router = express.Router()
 const bcrypt = require('bcrypt')
 
 const User = require('../models/userModel')
+const passport = require('passport')
 
 router.post('/register', async (req, res) => {
   try {
@@ -11,7 +12,7 @@ router.post('/register', async (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
-      pass: hashedPass,
+      password: hashedPass,
     }
     const newUser = new User(newData)
     newUser.save((err) => {
@@ -25,17 +26,20 @@ router.post('/register', async (req, res) => {
   }
 })
 
-router.post('/login', async (req, res) => {
-  const user = '' // add mongoose functionality that looks for the user based on email
-  try {
-    if (await bcrypt.compare(req.body.pass, user.pass)) {
-      res.send('This user exists and this is the right password')
-    } else {
-      res.send('Unsuccessful')
-    }
-    // then give them permission to access the dashboard and then route them to the dashboard
-  } catch (error) {}
-})
+// router.post('/login', passport.authenticate('local'))
+//   const user = ''
+
+//   // validatePassword
+
+//   if (await bcrypt.compare(req.body.pass, user.pass)) {
+//     res.send('This user exists and this is the right password')
+//   } else {
+//     res.send('Unsuccessful')
+//     // then give them permission to access the dashboard and then route them to the dashboard
+//   }
+//
+
+router.post('/login', passport.authenticate('local'))
 
 router.post('/logout', async (req, res) => {
   res.end()
