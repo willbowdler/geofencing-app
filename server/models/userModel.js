@@ -18,11 +18,15 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  roles: {
+    type: Object,
+    required: true,
+  },
 })
 
 //photo
-//email
-//admin boolean
+//roles
+// put estimates here? or in separate collection?
 
 const User = mongoose.model('User', UserSchema)
 

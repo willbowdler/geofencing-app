@@ -1,9 +1,10 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import registerUser from '../../utils/registerUser'
 
 //look for google font quicksand
-function RegisterPage() {
+function LoginPage() {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
@@ -31,7 +32,7 @@ function RegisterPage() {
             }}
             className='reg-form'
           >
-            <h2>Register</h2>
+            <h2>Login</h2>
             <div className='flex-sb'>
               <input
                 className='reg-input input-49'
@@ -77,7 +78,7 @@ function RegisterPage() {
 
             <div className='reg-login-opt'>
               <h5>
-                Already Have An Account? <a href=''>Login</a>
+                Dont have an account? <Link to='/register'>Register</Link>
               </h5>
             </div>
           </form>
@@ -87,7 +88,7 @@ function RegisterPage() {
   )
 }
 
-export default RegisterPage
+export default LoginPage
 
 //todo:
 //validation

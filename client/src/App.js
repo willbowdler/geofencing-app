@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import NavBar from './components/universal/NavBar'
 // import Footer from './components/universal/Footer'
 
-import RegisterPage from './components/pages/RegisterPage'
+import LoginPage from './components/pages/LoginPage'
 
 function App() {
   return (
@@ -11,8 +11,8 @@ function App() {
       <Router>
         <NavBar />
         <Routes>
-          <Route exact path='/' element={<RegisterPage />}></Route>
-          <Route exact path='/register' element={<RegisterPage />}></Route>
+          <Route exact path='/' element={<LoginPage />}></Route>
+          {/* <Route exact path='/register' element={<RegisterPage />}></Route> */}
         </Routes>
       </Router>
     </>
