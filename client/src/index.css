@@ -59,13 +59,13 @@ footer {
 
 /* Register Page Styles */
 
-.reg-flex {
+.log-flex {
   display: flex;
   /* height: calc(100vh - 150px); */
   height: calc(100vh - 92.5px);
 }
 
-.reg-image {
+.log-image {
   position: relative;
   display: flex;
   justify-content: center;
@@ -77,11 +77,11 @@ footer {
   background-position: center;
 }
 
-.reg-image h1 {
+.log-image h1 {
   color: white;
 }
 
-.reg-image::before {
+.log-image::before {
   content: '';
   position: absolute;
   top: 0;
@@ -91,7 +91,7 @@ footer {
   background-color: var(--colorOne);
   transform: skewX(-5deg);
 }
-.reg-form-cont {
+.log-form-cont {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -99,7 +99,16 @@ footer {
   background-color: var(--colorOne);
 }
 
-.reg-form {
+.reg-form-cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 92.5px);
+  background-color: var(--colorOne);
+}
+
+.reg-form,
+.log-form {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -112,7 +121,7 @@ footer {
   box-shadow: 0px 0px 10px 0px rgba(86, 85, 85, 0.296);
 }
 
-.reg-input {
+.auth-input {
   padding: 0 0.5rem;
   height: 45px;
   background: #fff;

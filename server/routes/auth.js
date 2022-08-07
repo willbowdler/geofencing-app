@@ -13,33 +13,24 @@ router.post('/register', async (req, res) => {
       lastName: req.body.lastName,
       email: req.body.email,
       password: hashedPass,
+      roles: { user: 1234 },
     }
-    const newUser = new User(newData)
+    const newUser = await new User(newData)
     newUser.save((err) => {
       err && console.log(err.message)
     })
 
-    console.log(newData)
     res.send('it worked')
   } catch (error) {
     res.status(500).send()
   }
 })
 
-// router.post('/login', passport.authenticate('local'))
-//   const user = ''
-
-//   // validatePassword
-
-//   if (await bcrypt.compare(req.body.pass, user.pass)) {
-//     res.send('This user exists and this is the right password')
-//   } else {
-//     res.send('Unsuccessful')
-//     // then give them permission to access the dashboard and then route them to the dashboard
-//   }
-//
-
-router.post('/login', passport.authenticate('local'))
+router.post('/login', passport.authenticate('local'), (req, res, next) => {
+  const user = req.session.passport.user
+  console.log(user)
+  res.send(user)
+})
 
 router.post('/logout', async (req, res) => {
   res.end()

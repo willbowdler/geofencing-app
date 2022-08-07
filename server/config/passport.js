@@ -8,17 +8,22 @@ const customField = {
 }
 
 const verifyCallback = (username, password, done) => {
-  User.findOne({ username: username })
+  User.findOne({ email: username })
     .then((user) => {
       if (!user) {
+        console.log('there is no user')
         return done(null, false)
       }
 
-      if (bcrypt.compare(req.body.pass, user.pass)) {
-        return done(null, user)
-      } else {
-        return done(null, false)
-      }
+      bcrypt.compare(password, user.password, function (err, isValid) {
+        if (isValid) {
+          console.log('yeup')
+          return done(null, user)
+        } else {
+          console.log('nope')
+          return done(err)
+        }
+      })
     })
     .catch((err) => {
       done(err)
@@ -30,7 +35,7 @@ const strategy = new LocalStrategy(customField, verifyCallback)
 passport.use(strategy)
 
 passport.serializeUser((user, done) => {
-  done(null, user.id)
+  done(null, user)
 })
 passport.deserializeUser(async (userId, done) => {
   try {

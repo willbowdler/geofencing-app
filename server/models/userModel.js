@@ -19,7 +19,7 @@ const UserSchema = new Schema({
     required: true,
   },
   roles: {
-    type: Object,
+    type: Object, // More specific in the Schema?
     required: true,
   },
 })
