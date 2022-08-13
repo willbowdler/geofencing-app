@@ -2,9 +2,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import { AuthProvider } from './context/AuthContext'
 import NavBar from './components/universal/NavBar'
+import RequireAuth from './components/RequireAuth'
 // import Footer from './components/universal/Footer'
 import LoginPage from './components/pages/publicRoutes/LoginPage'
 import RegisterPage from './components/pages/publicRoutes/RegisterPage/RegisterPage'
+import Dashboard from './components/pages/privateRoutes/DashboardPage/Dashboard'
 
 function App() {
   return (

@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from 'react'
 const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState('')
+  const [user, setUser] = useState({ user: null })
 
   const registerUser = (data) => {
     fetch('/api/auth/register', {
@@ -15,16 +15,18 @@ export const AuthProvider = ({ children }) => {
     })
   }
 
-  const loginUser = (data) => {
+  const loginUser = (logData) => {
     fetch('/api/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(logData),
     })
       .then((res) => res.json())
-      .then((data = console.log(data)))
+      .then((data) => {
+        setUser(data)
+      }) // There might be a better way to do this. With cookies, session, and fetch?
       .catch((err) => console.log(err))
   }
 
