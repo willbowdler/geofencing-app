@@ -1,5 +1,5 @@
-function Dashboard() {
-  return <div>Dashboardhcufhvhjhkbkbjvjyfvffjfjj,jf</div>
+function DashboardPage() {
+  return <div className='dash-cont'>hey</div>
 }
 
-export default Dashboard
+export default DashboardPage

@@ -13,6 +13,7 @@
 :root {
   --colorOne: #6d4950;
   --colorTwo: #441a24;
+  --colorThree: #dcdcdc;
 }
 
 .flex-sb {
@@ -115,7 +116,7 @@ footer {
   padding: 0 1rem;
   height: 500px;
   width: 400px;
-  background-color: #dcdcdc;
+  background-color: var(--colorThree);
   text-align: center;
   border-radius: 15px;
   box-shadow: 0px 0px 10px 0px rgba(86, 85, 85, 0.296);
@@ -138,4 +139,60 @@ input[type='submit'] {
   position: relative;
   margin: 0 auto;
   width: 150px;
+}
+
+/* Dashboard Styles */
+
+.dash-cont {
+  height: calc(100vh - 92.5px);
+  background-color: var(--colorThree);
+}
+
+.est-cont {
+  height: calc(100vh - 92.5px);
+  background-color: var(--colorOne);
+  padding: 1rem 2.5rem;
+}
+
+.est-cont-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  height: 82vh;
+  border-radius: 20px;
+  padding: 0 4rem 3rem 4rem;
+}
+
+.est-title-bar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.est-title-total {
+  height: 3rem;
+}
+
+.est-title-total {
+  display: flex;
+  justify-content: space-between;
+  width: 20%;
+}
+
+.est-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.est-estimate {
+  height: 70vh;
+  background-color: black;
+  width: 60%;
+}
+
+.est-options {
+  height: 70vh;
+  background-color: #441a24;
+  width: 30%;
 }

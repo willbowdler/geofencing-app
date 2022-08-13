@@ -7,6 +7,7 @@ import RequireAuth from './components/RequireAuth'
 import LoginPage from './components/pages/publicRoutes/LoginPage'
 import RegisterPage from './components/pages/publicRoutes/RegisterPage/RegisterPage'
 import Dashboard from './components/pages/privateRoutes/DashboardPage/Dashboard'
+import EstimatePage from './components/pages/privateRoutes/EstimatePage/EstimatePage'
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
           <Route exact path='/register' element={<RegisterPage />}></Route>
 
           {/* Private Routes */}
+          <Route exact path='/dashboard' element={<Dashboard />}></Route>
+          <Route exact path='/estimate' element={<EstimatePage />}></Route>
         </Routes>
       </Router>
     </AuthProvider>
