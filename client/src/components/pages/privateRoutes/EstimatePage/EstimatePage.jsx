@@ -1,7 +1,8 @@
+import MapComponent from './MapComponent'
+
 function EstimatePage() {
   return (
     <div className='est-cont'>
-      hey
       <div className='est-cont-2'>
         <div className='est-title-bar'>
           <div className='est-title-hello'>Hello Will</div>
@@ -11,8 +12,16 @@ function EstimatePage() {
           </div>
         </div>
         <div className='est-flex'>
-          <div className='est-estimate'>a</div>
-          <div className='est-options'></div>
+          <div className='est-estimate'>
+            <div className='est-map'>
+              <MapComponent />
+              <input className='map-input' type='text' placeholder='Address' />
+            </div>
+            <div className='address'></div>
+          </div>
+          <form className='est-options'>
+            <h3>Options</h3>
+          </form>
         </div>
       </div>
     </div>

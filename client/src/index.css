@@ -149,6 +149,9 @@ input[type='submit'] {
 }
 
 .est-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   height: calc(100vh - 92.5px);
   background-color: var(--colorOne);
   padding: 1rem 2.5rem;
@@ -187,12 +190,22 @@ input[type='submit'] {
 
 .est-estimate {
   height: 70vh;
-  background-color: black;
   width: 60%;
+  background-color: var(--colorThree);
+  border-radius: 20px;
+}
+
+.map-input {
+  height: 30px;
+  width: 15rem;
+  padding: 5px;
+  border: none;
+  border-radius: 10px;
 }
 
 .est-options {
   height: 70vh;
+  width: 37%;
   background-color: #441a24;
-  width: 30%;
+  border-radius: 20px;
 }
