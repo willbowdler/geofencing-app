@@ -195,6 +195,11 @@ input[type='submit'] {
   border-radius: 20px;
 }
 
+.est-map {
+  width: 100%;
+  height: 100%;
+}
+
 .map-input {
   height: 30px;
   width: 15rem;
