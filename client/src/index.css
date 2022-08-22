@@ -186,31 +186,86 @@ input[type='submit'] {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  color: #fff;
 }
 
 .est-estimate {
   height: 70vh;
   width: 60%;
-  background-color: var(--colorThree);
   border-radius: 20px;
+}
+
+.map-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
 }
 
 .est-map {
   width: 100%;
-  height: 100%;
+  height: 93%;
+  border-radius: 10px;
 }
 
 .map-input {
   height: 30px;
   width: 15rem;
   padding: 5px;
-  border: none;
+  border: 1px solid black;
   border-radius: 10px;
+  background-color: #eee;
+}
+
+.map-input::placeholder {
+  color: black;
 }
 
 .est-options {
   height: 70vh;
   width: 37%;
+  padding: 1.25rem;
   background-color: #441a24;
   border-radius: 20px;
+}
+
+.option-subheader {
+  margin: 1rem 0.5rem 0.25rem 0;
+}
+
+.est-turf-type-input {
+  width: 20rem;
+  padding: 0.5rem;
+  background-color: white;
+  border: 3px solid var(--colorOne);
+  border-radius: 20px;
+}
+
+.est-rounds {
+  display: flex;
+  justify-content: space-around;
+}
+
+.est-round {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 50px;
+  background-color: rgb(178, 178, 178);
+  border: 1px solid #eee;
+  border-radius: 20px;
+  color: black;
+  cursor: pointer;
+}
+
+.est-round-selected {
+  background-color: var(--colorOne);
+}
+
+.est-round:hover {
+  background-color: rgb(79, 79, 79);
 }

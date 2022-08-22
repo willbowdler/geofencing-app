@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 3001
 const app = express()
 
 const authRoutes = require('./routes/auth')
+const returnWeeds = require('./middleware/returnWeeds')
 const passport = require('passport')
 
 mongoose.connect('mongodb://localhost:27017/geofencing-db')
@@ -35,6 +36,8 @@ app.use(passport.session())
 
 // Routes
 app.use('/api/auth', authRoutes)
+
+app.get('/api/weeds', returnWeeds)
 
 app.get('/api', (req, res) => {
   try {

@@ -1,28 +1,55 @@
-import {
-  GoogleMap,
-  DrawingManager,
-  useLoadScript,
-} from '@react-google-maps/api'
+import { useRef, useEffect, useState } from 'react'
+import { useAuth } from '../../../../context/AuthContext'
 
-function MapComponent() {
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyBBLPwb16EjMMIfCSJdW5TOosKpQ6a34z4',
-    libraries: ['drawing'],
-  })
+function MapComponent({ setTrtTotal, setYrTotal }) {
+  const mapRef = useRef()
+  const inputRef = useRef()
 
-  if (!isLoaded) {
-    return <div>hey</div>
-  } else {
-    return (
-      <GoogleMap
-        zoom={18}
-        center={{ lat: 44, lng: -80 }}
-        mapContainerClassName='est-map'
-      >
-        <DrawingManager />
-      </GoogleMap>
+  const auth = useAuth()
+  // if google script is loaded correctly, window.google would exist as an object
+  if (!window.google) {
+    const script = document.createElement('script')
+    script.src =
+      'https://maps.googleapis.com/maps/api/js?key=AIzaSyACJqxC03FSNsG6RFQ7XjAYMXF617BwB60&libraries=drawing,geometry,places&callback=initMap'
+    document.head.append(script)
+  }
+
+  let coords
+
+  const initMap = () => {
+    coords = { lat: 40.700802, lng: 73.987602 }
+    const mapOptions = {
+      center: coords,
+      zoom: 10,
+      mapTypeId: 'satellite',
+    }
+    const googleMap = new window.google.maps.Map(mapRef.current, mapOptions)
+    const drawingManager = new window.google.maps.drawing.DrawingManager()
+    drawingManager.setMap(googleMap)
+
+    const autocomplete = new window.google.maps.places.Autocomplete(
+      inputRef.current,
+      {
+        componentRestrictions: { country: 'us' },
+        fields: ['geometry, name'],
+        types: ['address'],
+      }
     )
   }
+
+  window.initMap = initMap
+
+  return (
+    <div className='map-cont'>
+      <input
+        ref={inputRef}
+        className='map-input'
+        type='text'
+        placeholder='Address'
+      />
+      <div ref={mapRef} className='est-map'></div>
+    </div>
+  )
 }
 
 export default MapComponent
