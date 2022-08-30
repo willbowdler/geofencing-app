@@ -8,17 +8,19 @@ import { Icon } from '@iconify/react'
 
 function EstimatePage() {
   const turfRef = useRef()
+  const [rounds, setRounds] = useState([1, 2, 3, 4, 5])
+
+  const handleChangeRounds = () => {
+    turfRef.current.value === 'Bermuda/Zoysia'
+      ? setRounds([1, 2, 3, 4, 5, 6, 7])
+      : setRounds([1, 2, 3, 4, 5])
+  }
 
   const auth = useAuth()
-  const [clicked, setClicked] = useState(['hey'])
+  const [clicked, setClicked] = useState([''])
 
   const [trtTotal, setTrtTotal] = useState(100)
   const [yrTotal, setYrTotal] = useState(0)
-
-  const rounds =
-    turfRef.current.value === 'Centipede/St.Augustine'
-      ? [1, 2, 3, 4, 5, 6]
-      : [1, 2, 3, 4, 5, 6, 7, 8]
 
   const handleClick = async (i) => {
     if (clicked.includes(i)) {
@@ -33,6 +35,11 @@ function EstimatePage() {
       setClicked(clicked)
     }
   }
+
+  {
+    /* use this to make modal appear vvvvvvvvv */
+  }
+  const [modalClicked, setModalClicked] = useState(false)
 
   return (
     <div className='est-cont'>
@@ -50,12 +57,7 @@ function EstimatePage() {
 
             <div className='address'></div>
           </div>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault()
-            }}
-            className='est-options'
-          >
+          <form onSubmit={(e) => e.preventDefault()} className='est-options'>
             <h3>Options</h3>
             <div className='est-turf-type'>
               <div className='option-subheader'>Turf Type</div>
@@ -63,6 +65,7 @@ function EstimatePage() {
                 ref={turfRef}
                 className='est-turf-type-input'
                 list='turf-type'
+                onChange={() => handleChangeRounds()}
               />
               <datalist id='turf-type'>
                 <option value='Centipede/St.Augustine' />
@@ -91,17 +94,25 @@ function EstimatePage() {
               </div>
               <div className='option-subheader'>
                 <h4>Weeds Killed</h4>
-                <Icon className='icon' icon='ic:twotone-fullscreen' />
+                <Icon
+                  onClick={() => setModalClicked(true)}
+                  className='icon'
+                  icon='ic:twotone-fullscreen'
+                />
               </div>
-              {/* <WeedsModal> */}
               <Weeds />
-              {/* </WeedsModal> */}
+
               <div className='option-subheader'>
                 <h4>Weeds Prevented</h4>
                 <Icon className='icon' icon='ic:twotone-fullscreen' />
               </div>
               <Weeds />
               <input className='est-submit' type='submit' value='Submit' />
+              {modalClicked && (
+                <WeedsModal>
+                  <Weeds modalSelected={true} />
+                </WeedsModal>
+              )}
             </div>
           </form>
         </div>
