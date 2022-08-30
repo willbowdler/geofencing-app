@@ -69,7 +69,7 @@ function RegisterPage() {
           }}
         />
 
-        <input className='auth-input' type='submit' value='Register' />
+        <input className='auth-submit' type='submit' value='Register' />
 
         <div className='reg-login-opt'>
           <h5>

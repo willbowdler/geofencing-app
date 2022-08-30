@@ -58,7 +58,7 @@ function LoginPage() {
               }}
             />
 
-            <input className='auth-input' type='submit' value='Login' />
+            <input className='auth-submit' type='submit' value='Login' />
 
             <div className='reg-login-opt'>
               <h5>

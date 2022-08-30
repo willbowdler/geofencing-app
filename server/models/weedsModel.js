@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const WeedsSchema = new Schema({
-  weedName: {
+  name: {
     type: String,
     required: true,
   },
@@ -11,15 +11,15 @@ const WeedsSchema = new Schema({
     required: true,
   },
   preventable: {
-    type: Array,
+    type: Object,
     required: true,
   },
   killable: {
-    type: Array,
+    type: Object,
     required: true,
   },
   lifetime: {
-    type: string,
+    type: String,
     required: true,
   },
 })

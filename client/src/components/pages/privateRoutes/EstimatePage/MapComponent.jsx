@@ -17,10 +17,10 @@ function MapComponent({ setTrtTotal, setYrTotal }) {
   let coords
 
   const initMap = () => {
-    coords = { lat: 40.700802, lng: 73.987602 }
+    coords = { lat: 32.43159, lng: -90.08828 }
     const mapOptions = {
       center: coords,
-      zoom: 10,
+      zoom: 20,
       mapTypeId: 'satellite',
     }
     const googleMap = new window.google.maps.Map(mapRef.current, mapOptions)
@@ -31,7 +31,7 @@ function MapComponent({ setTrtTotal, setYrTotal }) {
       inputRef.current,
       {
         componentRestrictions: { country: 'us' },
-        fields: ['geometry, name'],
+        fields: ['geometry', 'name', 'address_components'],
         types: ['address'],
       }
     )

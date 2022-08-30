@@ -135,10 +135,16 @@ footer {
   width: 49%;
 }
 
-input[type='submit'] {
+.auth-submit {
   position: relative;
-  margin: 0 auto;
   width: 150px;
+  height: 45px;
+  margin: 0 auto;
+  padding: 0 0.5rem;
+  background: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 /* Dashboard Styles */
@@ -234,6 +240,9 @@ input[type='submit'] {
 
 .option-subheader {
   margin: 1rem 0.5rem 0.25rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .est-turf-type-input {
@@ -268,4 +277,87 @@ input[type='submit'] {
 
 .est-round:hover {
   background-color: rgb(79, 79, 79);
+}
+
+.est-weeds {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 15vh;
+  background-color: rgb(226, 226, 226);
+  border-radius: 20px;
+
+  overflow-x: scroll;
+}
+
+.weeds-modal-cont {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(128, 128, 128, 0.324);
+}
+
+.weeds-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.weed-item-modal {
+  flex-shrink: 0;
+  width: 500px;
+  height: 60vh;
+  background-color: black;
+  border: 2px solid white;
+  border-radius: 10px;
+}
+
+.est-weed-item {
+  flex-shrink: 0;
+  width: 150px;
+  height: 90%;
+  background-color: black;
+  border: 2px solid white;
+  border-radius: 10px;
+}
+
+.modal-selected {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  width: 100vw;
+  height: 100vh;
+
+  overflow-x: scroll;
+}
+
+.icon {
+  font-size: 20px;
+  cursor: pointer;
+
+  transition: font-size 0.25s ease;
+}
+
+.icon-modal {
+  font-size: 100px;
+}
+
+.icon:hover {
+  font-size: 22px;
+}
+
+.est-submit {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid white;
+  border-radius: 15px;
+  float: right;
+  cursor: pointer;
+}
+
+.est-submit:hover {
+  background-color: var(--colorOne);
+  border: 1px solid white;
 }
