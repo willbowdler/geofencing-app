@@ -1,7 +1,7 @@
 const Weeds = require('../models/weedsModel')
 
-const returnWeeds = (req, res, next) => {
-  const weeds = Weeds.find()
+const returnWeeds = async (req, res, next) => {
+  const weeds = await Weeds.find()
   res.send(weeds)
 }
 

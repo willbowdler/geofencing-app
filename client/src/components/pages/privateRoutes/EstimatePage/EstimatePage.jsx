@@ -110,7 +110,10 @@ function EstimatePage() {
               <input className='est-submit' type='submit' value='Submit' />
               {modalClicked && (
                 <WeedsModal>
-                  <Weeds modalSelected={true} />
+                  <Weeds
+                    setModalClicked={setModalClicked}
+                    modalSelected={true}
+                  />
                 </WeedsModal>
               )}
             </div>

@@ -246,7 +246,7 @@ footer {
 }
 
 .est-turf-type-input {
-  width: 20rem;
+  width: 70%;
   padding: 0.5rem;
   background-color: white;
   border: 3px solid var(--colorOne);
@@ -294,15 +294,12 @@ footer {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(128, 128, 128, 0.324);
-}
-
-.weeds-modal {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(128, 128, 128, 0.324);
 }
 
 .weed-item-modal {
@@ -312,6 +309,14 @@ footer {
   background-color: black;
   border: 2px solid white;
   border-radius: 10px;
+}
+
+.weed-item-title {
+  width: fit-content;
+  margin: 1rem 0 0 1rem;
+  padding: 0.25rem;
+  background-color: rgba(61, 61, 61, 0.567);
+  border-radius: 15px;
 }
 
 .est-weed-item {
@@ -328,7 +333,6 @@ footer {
   align-items: center;
   gap: 2rem;
   width: 100vw;
-  height: 100vh;
 
   overflow-x: scroll;
 }
@@ -340,12 +344,19 @@ footer {
   transition: font-size 0.25s ease;
 }
 
-.icon-modal {
-  font-size: 100px;
-}
-
 .icon:hover {
   font-size: 22px;
+}
+
+.icon-modal {
+  font-size: 60px;
+  float: right;
+  cursor: pointer;
+
+  transition: font-size 0.25s ease;
+}
+.icon-modal:hover {
+  font-size: 65px;
 }
 
 .est-submit {

@@ -11,11 +11,11 @@ const WeedsSchema = new Schema({
     required: true,
   },
   preventable: {
-    type: Object,
+    type: Array,
     required: true,
   },
   killable: {
-    type: Object,
+    type: Array,
     required: true,
   },
   lifetime: {
