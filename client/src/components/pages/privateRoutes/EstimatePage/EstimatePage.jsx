@@ -100,13 +100,17 @@ function EstimatePage() {
                   icon='ic:twotone-fullscreen'
                 />
               </div>
-              <Weeds />
+              <Weeds prevKillToggle={true} />
 
               <div className='option-subheader'>
                 <h4>Weeds Prevented</h4>
-                <Icon className='icon' icon='ic:twotone-fullscreen' />
+                <Icon
+                  onClick={() => setModalClicked(true)}
+                  className='icon'
+                  icon='ic:twotone-fullscreen'
+                />
               </div>
-              <Weeds />
+              <Weeds prevKillToggle={false} />
               <input className='est-submit' type='submit' value='Submit' />
               {modalClicked && (
                 <WeedsModal>
