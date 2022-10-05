@@ -17,7 +17,7 @@ function EstimatePage() {
   }
 
   const auth = useAuth()
-  const [clicked, setClicked] = useState([''])
+  const [clicked, setClicked] = useState([])
 
   const [trtTotal, setTrtTotal] = useState(100)
   const [yrTotal, setYrTotal] = useState(0)
@@ -26,19 +26,26 @@ function EstimatePage() {
     if (clicked.includes(i)) {
       await setYrTotal(yrTotal - trtTotal)
       const newArr = clicked.filter((val) => val !== i)
+      const rsArr = newArr.map((el) => el + 1)
+      console.log(newArr)
       setClicked(newArr)
+      setRoundsSelected(rsArr)
     }
 
     if (!clicked.includes(i)) {
       await setYrTotal(yrTotal + trtTotal)
-      clicked.push(i)
-      setClicked(clicked)
+      let newArr = clicked
+      newArr.push(i)
+      let rsArr = newArr.map((el) => el + 1)
+      setClicked(newArr)
+      setRoundsSelected(rsArr)
     }
   }
 
-  {
-    /* use this to make modal appear vvvvvvvvv */
-  }
+  const [roundsSelected, setRoundsSelected] = useState([])
+
+  // put this in a module
+
   const [modalClicked, setModalClicked] = useState(false)
 
   return (
@@ -79,7 +86,10 @@ function EstimatePage() {
                   const index = i
                   return (
                     <div
-                      onClick={async () => await handleClick(index)}
+                      onClick={async () => {
+                        await handleClick(index)
+                      }}
+                      // className='est-round'
                       className={
                         clicked.includes(index)
                           ? 'est-round'
@@ -100,7 +110,7 @@ function EstimatePage() {
                   icon='ic:twotone-fullscreen'
                 />
               </div>
-              <Weeds prevKillToggle={true} />
+              <Weeds prevKillToggle={true} roundsSelected={roundsSelected} />
 
               <div className='option-subheader'>
                 <h4>Weeds Prevented</h4>
@@ -110,11 +120,12 @@ function EstimatePage() {
                   icon='ic:twotone-fullscreen'
                 />
               </div>
-              <Weeds prevKillToggle={false} />
+              <Weeds roundsSelected={roundsSelected} prevKillToggle={false} />
               <input className='est-submit' type='submit' value='Submit' />
               {modalClicked && (
                 <WeedsModal>
                   <Weeds
+                    roundsSelected={roundsSelected}
                     setModalClicked={setModalClicked}
                     modalSelected={true}
                   />

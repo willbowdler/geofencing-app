@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react'
 import { Icon } from '@iconify/react'
 
-function Weeds({ prevKillToggle, modalSelected, setModalClicked }) {
-  const [weeds, setWeeds] = useState([])
-  const [filteredKill, setFilteredKill] = useState([])
+function Weeds({
+  roundsSelected,
+  prevKillToggle,
+  modalSelected,
+  setModalClicked,
+}) {
+  const [weeds, setWeeds] = useState(null)
   const [mappedWeeds, setMappedWeeds] = useState([])
-
-  const roundsSelected = [2, 10, 22]
 
   const filterWeedsPrevent = async () => {
     let newArr = weeds.filter((weed) =>
       weed.preventable.some((el) => (roundsSelected.includes(el) ? true : null))
     )
     await setMappedWeeds(newArr)
-
-    console.log(newArr)
   }
 
   const filterWeedsKill = async () => {
@@ -22,21 +22,23 @@ function Weeds({ prevKillToggle, modalSelected, setModalClicked }) {
       weed.killable.some((el) => (roundsSelected.includes(el) ? true : null))
     )
     await setMappedWeeds(newArr)
-
-    console.log(newArr)
   }
 
   useEffect(() => {
     async function fetchWeeds() {
       const res = await fetch('/api/weeds')
       const data = await res.json()
-      console.log(data)
-      await setWeeds(weeds.push(...data))
-      prevKillToggle ? filterWeedsKill() : filterWeedsPrevent()
-      // These are temporarily here. Later add them to an onlick. Also add functionality to delete items from the 'selected' array
+
+      setWeeds(data)
     }
     fetchWeeds()
   }, [])
+
+  useEffect(() => {
+    if (weeds) {
+      prevKillToggle ? filterWeedsKill() : filterWeedsPrevent()
+    }
+  }, [roundsSelected])
 
   if (!weeds) {
     return <div>Loading</div>
