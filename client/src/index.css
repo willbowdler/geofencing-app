@@ -256,6 +256,7 @@ footer {
 .est-rounds {
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 .est-round {
@@ -269,6 +270,8 @@ footer {
   border-radius: 20px;
   color: black;
   cursor: pointer;
+
+  transition: all 0.25s ease;
 }
 
 .est-round-selected {
@@ -276,7 +279,8 @@ footer {
 }
 
 .est-round:hover {
-  background-color: rgb(79, 79, 79);
+  width: 65px;
+  height: 45px;
 }
 
 .est-weeds {
