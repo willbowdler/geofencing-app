@@ -1,7 +1,8 @@
 import { Icon } from '@iconify/react'
+import Weeds from './Weeds'
 
-function WeedsModal({ children }) {
-  return <div className='weeds-modal-cont'>{children}</div>
+function WeedsModal() {
+  return <></>
 }
 
 export default WeedsModal

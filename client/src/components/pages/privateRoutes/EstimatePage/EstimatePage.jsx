@@ -2,7 +2,6 @@ import { useState, useRef } from 'react'
 import { useAuth } from '../../../../context/AuthContext'
 import MapComponent from './MapComponent'
 import Weeds from './Weeds'
-import WeedsModal from './WeedsModal'
 
 import { Icon } from '@iconify/react'
 
@@ -44,15 +43,11 @@ function EstimatePage() {
 
   const [roundsSelected, setRoundsSelected] = useState([])
 
-  // put this in a module
-
-  const [modalClicked, setModalClicked] = useState(false)
-
   return (
     <div className='est-cont'>
       <div className='est-cont-2'>
         <div className='est-title-bar'>
-          <div className='est-title-hello'>Hello {auth.user.email}</div>
+          <div className='est-title-hello'>Hello Guest{auth.user.email}</div>
           <div className='est-title-total'>
             <div className='treatment-total'>{`${trtTotal} per treatment`}</div>
             <div className='yearly-total'>{`${yrTotal} per year`}</div>
@@ -68,16 +63,17 @@ function EstimatePage() {
             <h3>Options</h3>
             <div className='est-turf-type'>
               <div className='option-subheader'>Turf Type</div>
-              <input
-                ref={turfRef}
+              <select
                 className='est-turf-type-input'
-                list='turf-type'
                 onChange={() => handleChangeRounds()}
-              />
-              <datalist id='turf-type'>
-                <option value='Centipede/St.Augustine' />
-                <option value='Bermuda/Zoysia' />
-              </datalist>
+                ref={turfRef}
+                id='turf-type'
+              >
+                <option value='Centipede/St.Augustine'>
+                  Centipede/St.Augustine
+                </option>
+                <option value='Bermuda/Zoysia'>Bermuda/Zoysia</option>
+              </select>
             </div>
             <div className='est-rounds-cont'>
               <h4 className='option-subheader'>Rounds</h4>
@@ -89,7 +85,6 @@ function EstimatePage() {
                       onClick={async () => {
                         await handleClick(index)
                       }}
-                      // className='est-round'
                       className={
                         clicked.includes(index)
                           ? 'est-round'
@@ -102,35 +97,9 @@ function EstimatePage() {
                   )
                 })}
               </div>
-              <div className='option-subheader'>
-                <h4>Weeds Killed</h4>
-                <Icon
-                  onClick={() => setModalClicked(true)}
-                  className='icon'
-                  icon='ic:twotone-fullscreen'
-                />
-              </div>
               <Weeds prevKillToggle={true} roundsSelected={roundsSelected} />
-
-              <div className='option-subheader'>
-                <h4>Weeds Prevented</h4>
-                <Icon
-                  onClick={() => setModalClicked(true)}
-                  className='icon'
-                  icon='ic:twotone-fullscreen'
-                />
-              </div>
               <Weeds roundsSelected={roundsSelected} prevKillToggle={false} />
               <input className='est-submit' type='submit' value='Submit' />
-              {modalClicked && (
-                <WeedsModal>
-                  <Weeds
-                    roundsSelected={roundsSelected}
-                    setModalClicked={setModalClicked}
-                    modalSelected={true}
-                  />
-                </WeedsModal>
-              )}
             </div>
           </form>
         </div>

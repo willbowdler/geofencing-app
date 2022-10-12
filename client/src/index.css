@@ -332,7 +332,7 @@ footer {
   border-radius: 10px;
 }
 
-.modal-selected {
+.modal-flex {
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -353,15 +353,26 @@ footer {
 }
 
 .icon-modal {
+  margin-right: 3rem;
+
   font-size: 60px;
-  color: rgb(255, 255, 255);
-  float: right;
+  color: rgb(0, 0, 0);
   cursor: pointer;
 
   transition: font-size 0.25s ease;
 }
 .icon-modal:hover {
   font-size: 65px;
+}
+
+.modal-title {
+  margin-left: 3rem;
+  color: black;
+}
+
+.icon-modal-flex {
+  display: flex;
+  justify-content: space-between;
 }
 
 .est-submit {
