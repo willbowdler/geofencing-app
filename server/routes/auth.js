@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const User = require('../models/userModel')
-const passport = require('passport')
 
 router.post('/register', async (req, res) => {
   try {
@@ -26,10 +26,13 @@ router.post('/register', async (req, res) => {
   }
 })
 
-router.post('/login', passport.authenticate('local'), (req, res, next) => {
-  const user = req.session.passport.user
-  console.log(user)
-  res.send(user)
+router.post('/login', async (req, res) => {
+  let newUser
+  try {
+    newUser = User.findOne({ email: email })
+    if (!newUser || password !== newUser.password) {
+    }
+  } catch (error) {}
 })
 
 router.post('/logout', async (req, res) => {

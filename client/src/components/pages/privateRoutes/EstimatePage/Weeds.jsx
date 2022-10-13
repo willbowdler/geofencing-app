@@ -46,7 +46,7 @@ function Weeds({ roundsSelected, prevKillToggle }) {
         <div className='option-subheader'>
           <h4>{`Weeds ${prevKillToggle ? 'Killed' : 'Prevented'}`}</h4>
           <Icon
-            onClick={() => roundsSelected.length >= 1 && setModalClicked(true)}
+            onClick={() => mappedWeeds.length >= 1 && setModalClicked(true)}
             className='icon'
             icon='ic:twotone-fullscreen'
           />

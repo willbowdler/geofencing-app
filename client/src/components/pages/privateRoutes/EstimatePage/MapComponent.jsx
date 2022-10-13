@@ -10,7 +10,7 @@ function MapComponent({ setTrtTotal, setYrTotal }) {
   if (!window.google) {
     const script = document.createElement('script')
     script.src =
-      'https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing,places&key=AIzaSyACJqxC03FSNsG6RFQ7XjAYMXF617BwB60&callback=initMap'
+      'https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing,places&key=AIzaSyCVCi4wteacHhyOfMWsiA57yV8nErkyCHY&callback=initMap'
     document.head.append(script)
   }
 
