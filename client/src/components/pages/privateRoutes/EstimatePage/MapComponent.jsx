@@ -1,12 +1,12 @@
-import { useRef, useEffect, useState } from 'react'
-import { useAuth } from '../../../../context/AuthContext'
+import { useRef } from 'react'
+// import { useAuth } from '../../../../context/AuthContext'
 
 function MapComponent({ setTrtTotal, setYrTotal }) {
   const mapRef = useRef()
   const inputRef = useRef()
 
-  const auth = useAuth()
-  // if google script is loaded correctly, window.google would exist as an object
+  // const auth = useAuth()
+
   if (!window.google) {
     const script = document.createElement('script')
     script.src =

@@ -6,14 +6,14 @@ function RegisterPage() {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
-  const [pass, setPass] = useState('')
+  const [password, setPass] = useState('')
   const [passCont, setPassCont] = useState('')
 
   const regData = {
     firstName,
     lastName,
     email,
-    pass,
+    password,
   }
 
   const auth = useAuth()

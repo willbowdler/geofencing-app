@@ -7,7 +7,7 @@ const User = require('../models/userModel')
 
 router.post('/register', async (req, res) => {
   try {
-    const hashedPass = await bcrypt.hash(req.body.pass, 10)
+    const hashedPass = await bcrypt.hash(req.body.password, 10)
     const newData = {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
@@ -27,16 +27,40 @@ router.post('/register', async (req, res) => {
 })
 
 router.post('/login', async (req, res) => {
-  let newUser
+  const email = req.body.email
+  const password = req.body.password
+  const newUser = await User.findOne({ email: email })
+
   try {
-    newUser = User.findOne({ email: email })
-    if (!newUser || password !== newUser.password) {
+    if (newUser && passBool) {
+      const passBool = await bcrypt.compare(password, newUser.password)
+      const accessToken = jwt.sign(newUser.toJSON(), process.env.JWT_SECRET)
+      res.json({ auth: true, accessToken: accessToken })
+      console.log('Christy Bowdler')
     }
-  } catch (error) {}
+
+    if (!newUser || !passBool) {
+      console.log('man, you put in the wrong info')
+      res.send({ error: 'wrong info' })
+    }
+  } catch (error) {
+    console.log(error)
+  }
 })
 
 router.post('/logout', async (req, res) => {
   res.end()
 })
+
+const verifyJWT = (req, res, next) => {
+  const token = req.headers['x-access-token']
+  !token
+    ? res.send('We need a token')
+    : jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+          res.json({ auth: false, message: 'Authentication failed.' })
+        } else req.userId = decoded.id
+      })
+}
 
 module.exports = router

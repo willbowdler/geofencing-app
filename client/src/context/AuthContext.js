@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
       .then((res) => res.json())
       .then((data) => {
         setUser(data)
-      }) // There might be a better way to do this. With cookies, session, and fetch?
+      })
       .catch((err) => console.log(err))
   }
 
