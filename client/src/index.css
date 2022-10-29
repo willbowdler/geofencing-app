@@ -178,6 +178,13 @@ footer {
   justify-content: space-between;
 }
 
+.est-title-hello {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  font-size: 20px;
+}
+
 .est-title-total {
   height: 3rem;
 }
@@ -185,6 +192,7 @@ footer {
 .est-title-total {
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
   width: 20%;
 }
 
@@ -224,6 +232,12 @@ footer {
   border: 1px solid black;
   border-radius: 10px;
   background-color: #eee;
+}
+
+.map-head {
+  display: flex;
+  justify-content: space-between;
+  color: black;
 }
 
 .map-input::placeholder {
@@ -407,5 +421,25 @@ footer {
   .log-form-cont {
     width: 100%;
     height: 80%;
+  }
+
+  /* Estimate Page Styles */
+
+  .est-cont,
+  .est-cont-2 {
+    height: fit-content;
+  }
+
+  .est-flex {
+    flex-direction: column-reverse;
+  }
+
+  .est-estimate {
+    width: 100%;
+  }
+
+  .est-options {
+    height: 50%;
+    width: 100%;
   }
 }

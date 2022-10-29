@@ -6,8 +6,8 @@ function RegisterPage() {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
-  const [password, setPass] = useState('')
-  const [passCont, setPassCont] = useState('')
+  const [password, setPass] = useState('1')
+  const [passCont, setPassCont] = useState('2')
 
   const regData = {
     firstName,
@@ -69,7 +69,13 @@ function RegisterPage() {
           }}
         />
 
-        <input className='auth-submit' type='submit' value='Register' />
+        <input
+          disabled={password !== passCont ? true : false}
+          onClick={() => auth.registerUser()}
+          className='auth-submit'
+          type='submit'
+          value='Register'
+        />
 
         <div className='reg-login-opt'>
           <h5>

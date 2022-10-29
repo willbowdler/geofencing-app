@@ -5,6 +5,16 @@ const jwt = require('jsonwebtoken')
 
 const User = require('../models/userModel')
 
+router.get('/persistLogin', async (req, res) => {
+  const cookieToken = req.cookies.token
+
+  cookieToken
+    ? jwt.verify(cookieToken, process.env.JWT_SECRET, (err, serialized) => {
+        err ? res.json({ error: err.message }) : res.json({ user: serialized })
+      })
+    : res.json({ message: 'You must log in' })
+})
+
 router.post('/register', async (req, res) => {
   try {
     const hashedPass = await bcrypt.hash(req.body.password, 10)
@@ -15,52 +25,67 @@ router.post('/register', async (req, res) => {
       password: hashedPass,
       roles: { user: 1234 },
     }
-    const newUser = await new User(newData)
-    newUser.save((err) => {
-      err && console.log(err.message)
-    })
 
-    res.send('it worked')
+    const userExists = await User.findOne({ email: newData.email }) // This is always returning a truthy value no matter what?
+    if (userExists) {
+      throw Error('User already exists')
+    }
+
+    if (!userExists) {
+      const newUser = await new User(newData)
+      newUser.save((err) => {
+        err && console.log(err.message)
+      })
+      const token = jwt.sign({ id: id }, process.env.JWT_SECRET, {
+        expiresIn: '3d',
+      })
+      res
+        .status(200)
+        .cookie('token', token, {
+          httpOnly: true,
+          expires: new Date(Date.now() + 900000),
+        })
+        .json({ user: newUser, token: token })
+    }
   } catch (error) {
-    res.status(500).send()
+    console.log(error.message)
+    res.status(400).json({ user: null, error: error.message })
   }
 })
 
 router.post('/login', async (req, res) => {
-  const email = req.body.email
-  const password = req.body.password
+  console.log(req.cookies)
+  const { email, password } = req.body
   const newUser = await User.findOne({ email: email })
 
   try {
-    if (newUser && passBool) {
-      const passBool = await bcrypt.compare(password, newUser.password)
-      const accessToken = jwt.sign(newUser.toJSON(), process.env.JWT_SECRET)
-      res.json({ auth: true, accessToken: accessToken })
-      console.log('Christy Bowdler')
-    }
+    if (!newUser) throw Error('User does not exist')
 
-    if (!newUser || !passBool) {
-      console.log('man, you put in the wrong info')
-      res.send({ error: 'wrong info' })
+    const passBool = await bcrypt.compare(password, newUser.password)
+    if (passBool) {
+      const accessToken = jwt.sign(newUser.toJSON(), process.env.JWT_SECRET)
+
+      res
+        .cookie('token', accessToken, {
+          httpOnly: true,
+          expires: new Date(Date.now() + 900000),
+        })
+
+        .json({ user: newUser, auth: true, accessToken: accessToken })
+
+      console.log('Christy Bowdler')
+
+      //store the token on the front end, then use a useEffect function to hit an endpoint that verifies that jwt and returns a user. BOOM
+    } else {
+      throw Error('Incorrect password')
     }
   } catch (error) {
     console.log(error)
   }
 })
 
-router.post('/logout', async (req, res) => {
-  res.end()
+router.get('/logout', async (req, res) => {
+  req.cookies.token && res.clearCookie('token').end()
 })
-
-const verifyJWT = (req, res, next) => {
-  const token = req.headers['x-access-token']
-  !token
-    ? res.send('We need a token')
-    : jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-        if (err) {
-          res.json({ auth: false, message: 'Authentication failed.' })
-        } else req.userId = decoded.id
-      })
-}
 
 module.exports = router

@@ -7,19 +7,20 @@ import { Icon } from '@iconify/react'
 
 function EstimatePage() {
   const turfRef = useRef()
+  const auth = useAuth()
+
+  const [clicked, setClicked] = useState([])
+  const [trtTotal, setTrtTotal] = useState(50)
+  const [yrTotal, setYrTotal] = useState(0)
   const [rounds, setRounds] = useState([1, 2, 3, 4, 5])
+  const [roundsSelected, setRoundsSelected] = useState([])
+  const [editSqFt, setEditSqFt] = useState(0)
 
   const handleChangeRounds = () => {
     turfRef.current.value === 'Bermuda/Zoysia'
       ? setRounds([1, 2, 3, 4, 5, 6, 7])
       : setRounds([1, 2, 3, 4, 5])
   }
-
-  const auth = useAuth()
-  const [clicked, setClicked] = useState([])
-
-  const [trtTotal, setTrtTotal] = useState(100)
-  const [yrTotal, setYrTotal] = useState(0)
 
   const handleClick = async (i) => {
     if (clicked.includes(i)) {
@@ -41,21 +42,35 @@ function EstimatePage() {
     }
   }
 
-  const [roundsSelected, setRoundsSelected] = useState([])
+  const emailData = {
+    from: `${auth.user.firstName} ${auth.user.lastName}`,
+    email: auth.user.email,
+    rounds: roundsSelected,
+    sqFt: editSqFt,
+    yrTotal: yrTotal,
+    trtTotal: trtTotal,
+  }
 
   return (
     <div className='est-cont'>
       <div className='est-cont-2'>
         <div className='est-title-bar'>
-          <div className='est-title-hello'>Hello Guest{auth.user.email}</div>
+          <div className='est-title-hello'>Hello {auth.user.firstName}</div>
           <div className='est-title-total'>
-            <div className='treatment-total'>{`${trtTotal} per treatment`}</div>
-            <div className='yearly-total'>{`${yrTotal} per year`}</div>
+            <div className='treatment-total'>{`$${trtTotal} per treatment`}</div>
+            <div className='yearly-total'>{`$${yrTotal} per year`}</div>
           </div>
         </div>
         <div className='est-flex'>
           <div className='est-estimate'>
-            <MapComponent setTrtTotal={setTrtTotal} setYrTotal={setYrTotal} />
+            <MapComponent
+              setClicked={setClicked}
+              setRoundsSelected={setRoundsSelected}
+              setTrtTotal={setTrtTotal}
+              setYrTotal={setYrTotal}
+              editSqFt={editSqFt}
+              setEditSqFt={setEditSqFt}
+            />
 
             <div className='address'></div>
           </div>
@@ -99,7 +114,20 @@ function EstimatePage() {
               </div>
               <Weeds prevKillToggle={true} roundsSelected={roundsSelected} />
               <Weeds roundsSelected={roundsSelected} prevKillToggle={false} />
-              <input className='est-submit' type='submit' value='Submit' />
+              <input
+                onSubmit={() =>
+                  fetch('/api/email', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(emailData),
+                  })
+                }
+                className='est-submit'
+                type='submit'
+                value='Submit'
+              />
             </div>
           </form>
         </div>

@@ -3,7 +3,14 @@ import { createContext, useContext, useState } from 'react'
 const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({ user: null })
+  const [user, setUser] = useState(null)
+
+  const persistLogin = () => {
+    fetch('/api/auth/persistLogin')
+      .then((res) => res.json())
+      .then((data) => setUser(data.user))
+      .catch((err) => console.log(err.message))
+  }
 
   const registerUser = (data) => {
     fetch('/api/auth/register', {
@@ -13,6 +20,12 @@ export const AuthProvider = ({ children }) => {
       },
       body: JSON.stringify(data),
     })
+      .then((res) => res.json())
+      .then((data) => setUser(data.user))
+      .catch((err) => {
+        setUser(null)
+        console.log(err)
+      })
   }
 
   const loginUser = (logData) => {
@@ -25,13 +38,23 @@ export const AuthProvider = ({ children }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setUser(data)
+        setUser(data.user)
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        setUser(null)
+        console.log(err)
+      })
+  }
+
+  const logoutUser = () => {
+    fetch('/api/auth/logout')
+    setUser(null)
   }
 
   return (
-    <AuthContext.Provider value={{ registerUser, loginUser, user }}>
+    <AuthContext.Provider
+      value={{ persistLogin, registerUser, loginUser, logoutUser, user }}
+    >
       {children}
     </AuthContext.Provider>
   )

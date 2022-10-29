@@ -6,8 +6,8 @@ import { useAuth } from '../../../context/AuthContext'
 //look for google font quicksand
 function LoginPage() {
   const [email, setEmail] = useState('')
-  const [password, setPass] = useState('')
-  const [passCont, setPassCont] = useState('')
+  const [password, setPass] = useState('t')
+  const [passCont, setPassCont] = useState('f')
 
   const logData = {
     email,
@@ -58,7 +58,12 @@ function LoginPage() {
               }}
             />
 
-            <input className='auth-submit' type='submit' value='Login' />
+            <input
+              disabled={password !== passCont ? true : false}
+              className='auth-submit'
+              type='submit'
+              value='Login'
+            />
 
             <div className='reg-login-opt'>
               <h5>
