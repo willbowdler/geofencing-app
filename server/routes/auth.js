@@ -26,7 +26,7 @@ router.post('/register', async (req, res) => {
       roles: { user: 1234 },
     }
 
-    const userExists = await User.findOne({ email: newData.email }) // This is always returning a truthy value no matter what?
+    const userExists = await User.findOne({ email: newData.email })
     if (userExists) {
       throw Error('User already exists')
     }
@@ -74,8 +74,6 @@ router.post('/login', async (req, res) => {
         .json({ user: newUser, auth: true, accessToken: accessToken })
 
       console.log('Christy Bowdler')
-
-      //store the token on the front end, then use a useEffect function to hit an endpoint that verifies that jwt and returns a user. BOOM
     } else {
       throw Error('Incorrect password')
     }

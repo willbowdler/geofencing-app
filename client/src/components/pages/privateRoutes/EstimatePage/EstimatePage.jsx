@@ -3,8 +3,6 @@ import { useAuth } from '../../../../context/AuthContext'
 import MapComponent from './MapComponent'
 import Weeds from './Weeds'
 
-import { Icon } from '@iconify/react'
-
 function EstimatePage() {
   const turfRef = useRef()
   const auth = useAuth()
@@ -15,6 +13,15 @@ function EstimatePage() {
   const [rounds, setRounds] = useState([1, 2, 3, 4, 5])
   const [roundsSelected, setRoundsSelected] = useState([])
   const [editSqFt, setEditSqFt] = useState(0)
+
+  const emailData = {
+    from: `${auth.user.firstName} ${auth.user.lastName}`,
+    email: auth.user.email,
+    rounds: roundsSelected,
+    sqFt: editSqFt,
+    yrTotal: yrTotal,
+    trtTotal: trtTotal,
+  }
 
   const handleChangeRounds = () => {
     turfRef.current.value === 'Bermuda/Zoysia'
@@ -42,15 +49,6 @@ function EstimatePage() {
     }
   }
 
-  const emailData = {
-    from: `${auth.user.firstName} ${auth.user.lastName}`,
-    email: auth.user.email,
-    rounds: roundsSelected,
-    sqFt: editSqFt,
-    yrTotal: yrTotal,
-    trtTotal: trtTotal,
-  }
-
   return (
     <div className='est-cont'>
       <div className='est-cont-2'>
@@ -74,7 +72,19 @@ function EstimatePage() {
 
             <div className='address'></div>
           </div>
-          <form onSubmit={(e) => e.preventDefault()} className='est-options'>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault()
+              fetch('/api/email/submit', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(emailData),
+              })
+            }}
+            className='est-options'
+          >
             <h3>Options</h3>
             <div className='est-turf-type'>
               <div className='option-subheader'>Turf Type</div>
@@ -114,20 +124,7 @@ function EstimatePage() {
               </div>
               <Weeds prevKillToggle={true} roundsSelected={roundsSelected} />
               <Weeds roundsSelected={roundsSelected} prevKillToggle={false} />
-              <input
-                onSubmit={() =>
-                  fetch('/api/email', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(emailData),
-                  })
-                }
-                className='est-submit'
-                type='submit'
-                value='Submit'
-              />
+              <input className='est-submit' type='submit' value='Submit' />
             </div>
           </form>
         </div>
