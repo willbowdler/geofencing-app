@@ -71,7 +71,6 @@ function RegisterPage() {
 
         <input
           disabled={password !== passCont ? true : false}
-          onClick={() => auth.registerUser()}
           className='auth-submit'
           type='submit'
           value='Register'

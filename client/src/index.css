@@ -403,6 +403,48 @@ footer {
   border: 1px solid white;
 }
 
+.submit-modal-cont {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(128, 128, 128, 0.55);
+}
+
+.submit-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+  height: 40%;
+  padding: 3rem;
+  border-radius: 15px;
+  background-color: var(--colorTwo);
+  color: #fff;
+  text-align: center;
+}
+
+.submit-button {
+  margin-top: 1.5rem;
+  width: 7rem;
+  padding: 0.5rem;
+  border: 1px solid white;
+  border-radius: 15px;
+  transition: all 0.1s ease;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: var(--colorOne);
+  border: 1px solid white;
+}
 @media screen and (max-width: 1100px) {
   .log-flex {
     flex-direction: column;

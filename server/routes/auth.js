@@ -17,6 +17,7 @@ router.get('/persistLogin', async (req, res) => {
 
 router.post('/register', async (req, res) => {
   try {
+    console.log(req.body)
     const hashedPass = await bcrypt.hash(req.body.password, 10)
     const newData = {
       firstName: req.body.firstName,
@@ -36,7 +37,7 @@ router.post('/register', async (req, res) => {
       newUser.save((err) => {
         err && console.log(err.message)
       })
-      const token = jwt.sign({ id: id }, process.env.JWT_SECRET, {
+      const token = jwt.sign(newUser.toJSON(), process.env.JWT_SECRET, {
         expiresIn: '3d',
       })
       res
@@ -48,7 +49,7 @@ router.post('/register', async (req, res) => {
         .json({ user: newUser, token: token })
     }
   } catch (error) {
-    console.log(error.message)
+    console.log(error)
     res.status(400).json({ user: null, error: error.message })
   }
 })

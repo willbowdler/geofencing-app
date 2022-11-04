@@ -13,6 +13,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   const registerUser = (data) => {
+    console.log(data)
     fetch('/api/auth/register', {
       method: 'POST',
       headers: {
