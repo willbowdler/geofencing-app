@@ -8,12 +8,10 @@ import {
 } from 'react-router-dom'
 
 import NavBar from './components/universal/NavBar'
-import RequireAuth from './components/RequireAuth'
 import { useAuth } from './context/AuthContext'
-// import Footer from './components/universal/Footer'
 import LoginPage from './components/pages/publicRoutes/LoginPage'
 import RegisterPage from './components/pages/publicRoutes/RegisterPage/RegisterPage'
-import Dashboard from './components/pages/privateRoutes/DashboardPage/Dashboard'
+import AboutPage from './components/pages/publicRoutes/AboutPage/AboutPage'
 import EstimatePage from './components/pages/privateRoutes/EstimatePage/EstimatePage'
 
 function App() {
@@ -35,9 +33,9 @@ function App() {
           path='/register'
           element={user ? <Navigate to='/estimate' /> : <RegisterPage />}
         ></Route>
+        <Route exact path='/about' element={<AboutPage />}></Route>
 
         {/* Private Routes */}
-        <Route exact path='/dashboard' element={<Dashboard />}></Route>
         <Route
           exact
           path='/estimate'
