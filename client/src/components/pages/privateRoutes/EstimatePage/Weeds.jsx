@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Icon } from '@iconify/react'
-import WeedsModal from './WeedsModal'
 
 function Weeds({ roundsSelected, prevKillToggle }) {
   const [weeds, setWeeds] = useState(null)

@@ -1,5 +1,4 @@
-import { useRef, useState } from 'react'
-// import { useAuth } from '../../../../context/AuthContext'
+import { useRef, useEffect } from 'react'
 
 function MapComponent({
   setClicked,
@@ -16,8 +15,7 @@ function MapComponent({
 
   if (!window.google) {
     const script = document.createElement('script')
-    script.src =
-      'https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing,places&key=AIzaSyCVCi4wteacHhyOfMWsiA57yV8nErkyCHY&callback=initMap'
+    script.src = `https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing,places&key=AIzaSyCVCi4wteacHhyOfMWsiA57yV8nErkyCHY&callback=initMap`
     document.head.append(script)
   }
 
@@ -26,7 +24,6 @@ function MapComponent({
   const initMap = () => {
     let latitude
     let longitude
-    let areaValues = []
     const autocomplete = new window.google.maps.places.Autocomplete(
       inputRef.current,
       {
@@ -105,8 +102,7 @@ function MapComponent({
       setEditSqFt(`${areaSum}`)
     })
   }
-
-  window.initMap = initMap
+  useEffect(() => (window.initMap = initMap), [])
 
   return (
     <div className='map-cont'>

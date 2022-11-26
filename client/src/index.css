@@ -77,6 +77,7 @@ footer {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  text-align: center;
 }
 
 .log-image h1 {
@@ -148,11 +149,20 @@ footer {
   cursor: pointer;
 }
 
+.logout-modal {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
 /* About Page Styles */
 
 .about-cont {
   padding: 3rem;
-  height: calc(100vh - 92.5px);
+  min-height: calc(100vh - 92.5px);
   background-color: var(--colorOne);
   color: var(--colorThree);
 }
@@ -332,12 +342,8 @@ footer {
   border-radius: 10px;
 }
 
-.weed-item-title {
-  width: fit-content;
-  margin: 1rem 0 0 1rem;
-  padding: 0.25rem;
-  background-color: rgba(61, 61, 61, 0.567);
-  border-radius: 15px;
+.weed-item-modal h1 {
+  margin: 0.5rem 0 0 1rem;
 }
 
 .est-weed-item {
@@ -373,7 +379,10 @@ footer {
   margin-right: 3rem;
 
   font-size: 60px;
+  background-color: white;
   color: rgb(0, 0, 0);
+  border-radius: 15px;
+
   cursor: pointer;
 
   transition: font-size 0.25s ease;
@@ -383,13 +392,20 @@ footer {
 }
 
 .modal-title {
+  display: flex;
+  align-items: center;
   margin-left: 3rem;
+  padding: 1rem;
+  background-color: white;
   color: black;
+  border-radius: 15px;
 }
 
 .icon-modal-flex {
   display: flex;
   justify-content: space-between;
+  height: 4rem;
+  margin: 0.5rem;
 }
 
 .est-submit {
@@ -434,6 +450,11 @@ footer {
   text-align: center;
 }
 
+.submit-btn-div {
+  display: flex;
+  gap: 1.75rem;
+}
+
 .submit-button {
   margin-top: 1.5rem;
   width: 7rem;
@@ -475,6 +496,16 @@ footer {
     height: fit-content;
   }
 
+  .est-title-bar {
+    align-items: center;
+    height: 5rem;
+  }
+
+  .est-title-total {
+    height: auto;
+    width: auto;
+  }
+
   .est-flex {
     flex-direction: column-reverse;
   }
@@ -486,5 +517,53 @@ footer {
   .est-options {
     height: 50%;
     width: 100%;
+  }
+
+  .map-head {
+    align-items: center;
+    height: 5rem;
+  }
+
+  @media screen and (max-width: 414px) {
+    .est-cont,
+    .est-cont-2 {
+      padding: 0;
+      border-radius: 0;
+    }
+    .est-options,
+    .est-map {
+      border-radius: 0;
+    }
+
+    .est-title-bar,
+    .map-head {
+      padding: 0 1rem;
+    }
+
+    .map-head {
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .map-input {
+      width: 18rem;
+    }
+
+    /* Modals */
+
+    .modal-title,
+    .icon-modal {
+      margin: 0;
+    }
+
+    .icon-modal-flex {
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .submit-modal {
+      width: auto;
+      height: auto;
+    }
   }
 }

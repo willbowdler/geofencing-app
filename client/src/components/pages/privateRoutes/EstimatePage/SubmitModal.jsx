@@ -33,11 +33,24 @@ function SubmitModal({ setSubModalShow, emailData }) {
         <div className='submit-message'>
           {!submitClicked ? submitMessage : submittedMessage}
         </div>
-        <input
-          className='submit-button'
-          type='submit'
-          value={!submitClicked ? 'Submit' : 'Close Window'}
-        />
+        <div className='submit-btn-div'>
+          <input
+            className='submit-button'
+            type='submit'
+            value={!submitClicked ? 'Submit' : 'Close Window'}
+          />
+          {!submitClicked ? (
+            <button
+              className='submit-button'
+              onClick={() => {
+                setSubmitClicked(false)
+                setSubModalShow(false)
+              }}
+            >
+              Cancel
+            </button>
+          ) : null}
+        </div>
       </div>
     </form>
   )
