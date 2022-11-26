@@ -7,8 +7,7 @@
   -why used
 
 - react fixed
-  - is everything secure and in a env variable
-  - gm api and email
+
 
 
 - deploy to wbowdler and add a link to the home page (with directions to log in with t)
