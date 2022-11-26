@@ -15,7 +15,7 @@ function MapComponent({
 
   if (!window.google) {
     const script = document.createElement('script')
-    script.src = `https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing,places&key=AIzaSyCVCi4wteacHhyOfMWsiA57yV8nErkyCHY&callback=initMap`
+    script.src = `https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing,places&key=${process.env.REACT_APP_MAP_API_KEY}&callback=initMap`
     document.head.append(script)
   }
 
