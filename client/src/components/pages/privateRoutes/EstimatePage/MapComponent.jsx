@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 
 function MapComponent({
   setClicked,
@@ -72,8 +73,7 @@ function MapComponent({
 
     drawingManager.addListener('overlaycomplete', function (e) {
       polygons.push(e)
-      // console.log(e)
-      // console.log(polygons)
+
       polyAreas = polygons.map((p) => getAreaFt(p))
       areaSum = getAreaSum(polyAreas)
       console.log(polyAreas)
@@ -102,7 +102,10 @@ function MapComponent({
       setEditSqFt(`${areaSum}`)
     })
   }
-  useEffect(() => (window.initMap = initMap), [])
+  useEffect(() => {
+    if (!mapRef) return // This prevents an error that occurs when page link is clicked
+    window.initMap = initMap
+  })
 
   return (
     <div className='map-cont'>

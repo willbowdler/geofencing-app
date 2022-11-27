@@ -8,7 +8,6 @@ function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPass] = useState('t')
   const [passCont, setPassCont] = useState('f')
-
   const logData = {
     email,
     password,
@@ -36,7 +35,6 @@ function LoginPage() {
               className='auth-input'
               type='email'
               name='email'
-              id=''
               placeholder='Email'
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -44,14 +42,12 @@ function LoginPage() {
               className='auth-input'
               type='password'
               name='password'
-              id=''
               placeholder='Password'
               onChange={(e) => setPass(e.target.value)}
             />
             <input
               className='auth-input'
               type='password'
-              id=''
               placeholder='Confirm Password'
               onChange={(e) => {
                 setPassCont(e.target.value)
@@ -64,7 +60,7 @@ function LoginPage() {
               type='submit'
               value='Login'
             />
-
+            {auth.errMsg ? <p>{`${auth.errMsg}`}</p> : null}
             <div className='reg-login-opt'>
               <h5>
                 Dont have an account? <Link to='/register'>Register</Link>

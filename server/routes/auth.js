@@ -54,13 +54,13 @@ router.post('/register', async (req, res) => {
   }
 })
 
-router.post('/login', async (req, res) => {
+router.post('/login', async (req, res, next) => {
   console.log(req.cookies)
   const { email, password } = req.body
   const newUser = await User.findOne({ email: email })
 
   try {
-    if (!newUser) throw Error('User does not exist')
+    if (!newUser) res.status(401).json({ error: 'User does not exist' })
 
     const passBool = await bcrypt.compare(password, newUser.password)
     if (passBool) {
@@ -73,10 +73,8 @@ router.post('/login', async (req, res) => {
         })
 
         .json({ user: newUser, auth: true, accessToken: accessToken })
-
-      console.log('Christy Bowdler')
     } else {
-      throw Error('Incorrect password')
+      res.status(401).json({ error: 'Incorrect Password' })
     }
   } catch (error) {
     console.log(error)

@@ -4,6 +4,7 @@ const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
+  const [errMsg, setErrMsg] = useState(null)
 
   const persistLogin = () => {
     fetch('/api/auth/persistLogin')
@@ -39,11 +40,14 @@ export const AuthProvider = ({ children }) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        if (data.error) {
+          setErrMsg(data.error)
+        }
         setUser(data.user)
       })
       .catch((err) => {
-        setUser(null)
         console.log(err)
+        setUser(null)
       })
   }
 
@@ -54,7 +58,14 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ persistLogin, registerUser, loginUser, logoutUser, user }}
+      value={{
+        persistLogin,
+        registerUser,
+        loginUser,
+        logoutUser,
+        user,
+        errMsg,
+      }}
     >
       {children}
     </AuthContext.Provider>

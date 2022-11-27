@@ -11,7 +11,9 @@ const authRoutes = require('./routes/auth')
 const emailRoutes = require('./routes/email')
 const returnWeeds = require('./middleware/returnWeeds')
 
-mongoose.connect('mongodb://localhost:27017/geofencing-db')
+mongoose.connect(
+  `mongodb+srv://wbowdler:${process.env.MONGO_PASS}@geofencingc.v1rov.mongodb.net/weeds`
+)
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

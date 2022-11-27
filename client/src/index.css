@@ -519,6 +519,10 @@ footer {
     width: 100%;
   }
 
+  .est-options h3 {
+    text-align: center;
+  }
+
   .map-head {
     align-items: center;
     height: 5rem;
